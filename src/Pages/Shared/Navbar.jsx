@@ -1,12 +1,13 @@
 
-// import React, { useContext } from 'react';
+import React, { use } from 'react';
 import { Link } from 'react-router';
 import logo from '../../assets/logo.png';
+import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 // import { AuthContext } from '../Context/AuthProvider';
 
 
 const Navbar = () => {
-    // const { user, logOut } = useContext(AuthContext);
+    const { user,  } = use(AuthContext);
 
     // const handleLogout = () => {
     //     logOut()
@@ -35,13 +36,13 @@ const Navbar = () => {
                         >
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/availableFood">Available Foods</Link></li>
-                            {/* {user && (
+                            {user && (
                                 <>
                                     <li><Link to="/addFood">Add Food</Link></li>
                                     <li><Link to="/manageFood">Manage My Foods</Link></li>
                                     <li><Link to="/myFood">My Food Requests</Link></li>
                                 </>
-                            )} */}
+                            )}
                         </ul>
                     </div>
                     <h2 className="text-white text-xl font-bold ml-2">Share A Bite</h2>
@@ -52,21 +53,23 @@ const Navbar = () => {
                 <div className="navbar-center space-x-4 text-white hidden md:flex">
                     <Link to="/">Home</Link>
                     <Link to="/availableFood">Available Foods</Link>
-                    {/* {user && (
+                    {user && (
                         <>
                             <li><Link to="/addFood">Add Food</Link></li>
-                                    <li><Link to="/manageFood">Manage My Foods</Link></li>
-                                    <li><Link to="/myFood">My Food Requests</Link></li>
+                            <li><Link to="/manageFood">Manage My Foods</Link></li>
+                            <li><Link to="/myFood">My Food Requests</Link></li>
                         </>
-                    )} */}
+                    )}
                 </div>
 
 
-                {/* <div className="navbar-end flex items-center gap-4">
+                <div className="navbar-end flex items-center gap-4">
 
-                    {!user ? (
+                    {!user ? (<>
                         <Link className="text-white text-xl font-bold" to="/login">Login</Link>
                         <Link className="text-white text-xl font-bold" to="/signUp">SignUp</Link>
+                    </>
+
                     ) : (
                         <div className="flex items-center gap-4">
 
@@ -85,7 +88,7 @@ const Navbar = () => {
                             </button>
                         </div>
                     )}
-                </div> */}
+                </div>
             </div>
         </div>
     );
