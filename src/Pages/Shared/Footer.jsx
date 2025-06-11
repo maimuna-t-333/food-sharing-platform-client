@@ -1,5 +1,5 @@
 import React from 'react';
-// import logo from '../assets/logo.png'
+import logo from '../../assets/logo.png'
 import { RiFacebookCircleLine } from "react-icons/ri";
 import { FaInstagram } from "react-icons/fa";
 import { SlSocialYoutube } from "react-icons/sl";
@@ -7,9 +7,9 @@ import { SlSocialYoutube } from "react-icons/sl";
 const Footer = () => {
     return (
         <div>
-            <footer className="footer footer-horizontal footer-center  text-[#3A0519] p-10 bg-[#F1E5D1]">
+            <footer className="footer footer-horizontal footer-center  text-[#3A0519] p-10 bg-[#F39C72]">
                 <aside>
-                    {/* <img className='w-30 h-30' src={logo} alt="" /> */}
+                    <img className='w-26 h-26 rounded-b-full' src={logo} alt="" />
                     <nav>
                         <p className='font-semibold mb-3'>Follow us on</p>
                         <div className="grid grid-flow-col gap-4 mb-4">
