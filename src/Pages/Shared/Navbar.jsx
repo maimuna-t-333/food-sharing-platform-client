@@ -1,18 +1,20 @@
 
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import logo from '../../assets/logo.png';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 
 
 
 const Navbar = () => {
-    const { user,logOut } = use(AuthContext);
+    const { user, logOut } = use(AuthContext);
+    const navigate = useNavigate()
 
     const handleLogout = () => {
         logOut()
             .then(() => {
                 console.log('Logged out');
+                navigate('/')
             })
             .catch((err) => {
                 console.error(err);
@@ -65,12 +67,7 @@ const Navbar = () => {
 
                 <div className="navbar-end flex items-center gap-4">
 
-                    {user ? (<>
-                        <Link className="text-white text-xl font-bold" to="/login">Login</Link>
-                        <Link className="text-white text-xl font-bold" to="/signUp">SignUp</Link>
-                    </>
-
-                    ) : (
+                    {user ? ( <>
                         <div className="flex items-center gap-4">
 
                             {/* <div className="tooltip tooltip-bottom" data-tip={user.displayName || 'User'}>
@@ -86,9 +83,17 @@ const Navbar = () => {
                             >
                                 Logout
                             </button>
-                            
+
                         </div>
-                    )}
+                        </>
+                    ) :
+                        (<>
+                            <Link className="text-white text-xl font-bold" to="/login">Login</Link>
+                            <Link className="text-white text-xl font-bold" to="/signUp">SignUp</Link>
+                        </>
+
+                        )
+                    }
                 </div>
             </div>
         </div>
