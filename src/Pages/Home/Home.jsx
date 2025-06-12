@@ -1,10 +1,12 @@
 import React from 'react';
 import Banner from './Banner';
+import Review from './Review';
 
 const Home = () => {
     return (
-        <div>
+        <div className='bg-gray-300'>
             <Banner></Banner>
+            <Review></Review>
         </div>
     );
 };
