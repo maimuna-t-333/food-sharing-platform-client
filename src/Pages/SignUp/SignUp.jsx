@@ -7,7 +7,7 @@ const SignUp = () => {
 
     const { createUser } = use(AuthContext);
     const [error, setError] = useState(null);
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const handleSignUp = e => {
         e.preventDefault();

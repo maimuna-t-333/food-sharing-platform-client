@@ -1,4 +1,3 @@
-
 import React, { use } from 'react';
 import { Link, useNavigate } from 'react-router';
 import logo from '../../assets/logo.png';
@@ -10,8 +9,6 @@ const Navbar = () => {
     const { user, logOut } = use(AuthContext);
     // console.log(user)
     const navigate = useNavigate()
-
-
 
     const handleLogout = () => {
         logOut()
@@ -39,13 +36,13 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-300 rounded-box z-10 mt-3 w-52 p-2 shadow text-[#555555]"
                         >
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/availableFood">Available Foods</Link></li>
+                            <Link to="/">Home</Link>
+                            <Link to="/availableFood">Available Foods</Link>
                             {user && (
                                 <>
-                                    <li><Link to="/addFood">Add Food</Link></li>
-                                    <li><Link to="/manageFood">Manage My Foods</Link></li>
-                                    <li><Link to="/myFood">My Food Requests</Link></li>
+                                    <Link to="/addFood">Add Food</Link>
+                                    <Link to="/manageFood">Manage My Foods</Link>
+                                    <Link to="/myFood">My Food Requests</Link>
                                 </>
                             )}
                         </ul>
@@ -60,9 +57,9 @@ const Navbar = () => {
                     <Link to="/availableFood">Available Foods</Link>
                     {user && (
                         <>
-                            <li><Link to="/addFood">Add Food</Link></li>
-                            <li><Link to="/manageFood">Manage My Foods</Link></li>
-                            <li><Link to="/myFood">My Food Requests</Link></li>
+                            <Link to="/addFood">Add Food</Link>
+                            <Link to="/manageFood">Manage My Foods</Link>
+                            <Link to="/myFood">My Food Requests</Link>
                         </>
                     )}
                 </div>
@@ -70,7 +67,7 @@ const Navbar = () => {
 
                 <div className="navbar-end flex items-center gap-4">
 
-                    {user ?  (
+                    {user ? (
                         <div className="flex items-center gap-4">
 
                             <div className="tooltip tooltip-bottom" data-tip={user.displayName || 'User'}>
@@ -89,16 +86,13 @@ const Navbar = () => {
 
                         </div>
                     )
-                     :
-                       ( <>
+                        :
+                        (<>
                             <Link className="text-white text-xl font-bold" to="/login">Login</Link>
                             <Link className="text-white text-xl font-bold" to="/signUp">SignUp</Link>
                         </>)
-
-                        
                     }
                 </div>
-  x
             </div>
         </div>
     );

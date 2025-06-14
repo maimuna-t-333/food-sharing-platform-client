@@ -30,7 +30,14 @@ const Login = () => {
                 navigate('/')
             })
             .catch(err => {
-                console.log('Invalid email and password',err)
+                console.log('Invalid email and password',err);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Email or password are invalid.",
+                    showConfirmButton: false,
+                    timer: 1000
+                });
                 
             })
     }
