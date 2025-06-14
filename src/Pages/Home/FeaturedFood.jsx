@@ -7,11 +7,11 @@ const FeaturedFood = ({ foodPromise }) => {
   const { user } = use(AuthContext); 
   const navigate = useNavigate();
 
-  const handleViewDetails = (id) => {
+  const handleViewDetails = (_id) => {
     if (!user) {
       navigate('/login');
     } else {
-      navigate(`/foods/${id}`); 
+      navigate(`/foods/${_id}`); 
     }
   };
 
@@ -43,7 +43,7 @@ const FeaturedFood = ({ foodPromise }) => {
                   <p className="text-sm italic text-gray-600">"{food.notes}"</p>
                 )}
                 <button
-                  onClick={() => handleViewDetails(food.id)}
+                  onClick={() => handleViewDetails(food._id)}
                   className="btn bg-[#E67E22] rounded-2xl text-white hover:bg-[#cf6a1c] transition"
                 >
                   View Details
