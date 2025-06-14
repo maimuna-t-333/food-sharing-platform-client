@@ -6,6 +6,7 @@ import RootLayout from "../Layout/RootLayout";
 import Home from "../Pages/Home/Home";
 import SignUp from "../Pages/SignUp/SignUp";
 import Login from "../Pages/Login/Login";
+import FoodDetails from "../Pages/Home/FoodDetails";
 
 
 const router = createBrowserRouter([
@@ -24,7 +25,12 @@ const router = createBrowserRouter([
         {
           path:'login',
           Component:Login
+        },
+        {
+          path:'/foods/:id',
+          Component:FoodDetails
         }
+
     ]
   },
 ]);

@@ -1,8 +1,19 @@
 import React, { use } from 'react';
-import { Link } from 'react-router'; 
+import { useNavigate } from 'react-router'; 
+import { AuthContext } from '../../Contexts/AuthContext/AuthContext'; 
 
 const FeaturedFood = ({ foodPromise }) => {
-  const foods = use(foodPromise); 
+  const foods = use(foodPromise);
+  const { user } = use(AuthContext); 
+  const navigate = useNavigate();
+
+  const handleViewDetails = (id) => {
+    if (!user) {
+      navigate('/login');
+    } else {
+      navigate(`/foods/${id}`); 
+    }
+  };
 
   return (
     <div className="bg-gray-300">
@@ -31,17 +42,24 @@ const FeaturedFood = ({ foodPromise }) => {
                 {food.notes && (
                   <p className="text-sm italic text-gray-600">"{food.notes}"</p>
                 )}
+                <button
+                  onClick={() => handleViewDetails(food.id)}
+                  className="btn bg-[#E67E22] rounded-2xl text-white hover:bg-[#cf6a1c] transition"
+                >
+                  View Details
+                </button>
               </div>
             </div>
           ))}
         </div>
 
         <div className="text-center mt-10">
-          <Link to="/availableFood">
-            <button className="btn px-6 py-3 text-white border-none bg-[#ecb99f] rounded-lg hover:bg-[#ca957b] transition duration-300 transform hover:scale-105">
-              Show All Foods
-            </button>
-          </Link>
+          <button
+            onClick={() => navigate('/availableFood')}
+            className="btn px-6 py-3 text-white border-none bg-[#386591] rounded-lg hover:bg-[#2f547a] transition duration-300 transform hover:scale-105"
+          >
+            Show All Foods
+          </button>
         </div>
       </section>
     </div>
@@ -49,3 +67,4 @@ const FeaturedFood = ({ foodPromise }) => {
 };
 
 export default FeaturedFood;
+
