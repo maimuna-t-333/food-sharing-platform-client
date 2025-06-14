@@ -10,7 +10,7 @@ const AddFood = () => {
     e.preventDefault();
 
     const form = e.target;
-    const foodName = form.foodName.value;
+    const name = form.foodName.value;
     const image = form.image.value;
     const quantity = form.quantity.value;
     const pickupLocation = form.pickupLocation.value;
@@ -18,7 +18,7 @@ const AddFood = () => {
     const notes = form.notes.value;
 
     const foodData = {
-      foodName,
+      name,
       image,
       quantity,
       pickupLocation,
@@ -56,7 +56,7 @@ const AddFood = () => {
         <input type="text" name="pickupLocation" placeholder="Pickup Location" className="input input-bordered w-full" required />
         <input type="date" name="expireDate" className="input input-bordered w-full" required />
         <textarea name="notes" placeholder="Additional Notes" className="textarea textarea-bordered w-full"></textarea>
-        <button type="submit" className="btn btn-primary w-full">Add Food</button>
+        <button type="submit" className="btn bg-[#e76c6a] w-full">Add Food</button>
       </form>
     </div>
   );
