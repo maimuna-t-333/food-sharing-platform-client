@@ -8,12 +8,15 @@ import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 
 const Navbar = () => {
     const { user, logOut } = use(AuthContext);
+    // console.log(user)
     const navigate = useNavigate()
+
+
 
     const handleLogout = () => {
         logOut()
-            .then(() => {
-                console.log('Logged out');
+            .then((result) => {
+                console.log('Logged out', result);
                 navigate('/')
             })
             .catch((err) => {
@@ -67,16 +70,16 @@ const Navbar = () => {
 
                 <div className="navbar-end flex items-center gap-4">
 
-                    {user ? ( <>
+                    {user ?  (
                         <div className="flex items-center gap-4">
 
-                            {/* <div className="tooltip tooltip-bottom" data-tip={user.displayName || 'User'}>
+                            <div className="tooltip tooltip-bottom" data-tip={user.displayName || 'User'}>
                                 <img
                                     src={user.photoURL || 'https://i.ibb.co/2n4d3kR/default-avatar.png'}
                                     alt="User Avatar"
                                     className="w-10 h-10 rounded-full border-2 border-white"
                                 />
-                            </div> */}
+                            </div>
                             <button
                                 onClick={handleLogout}
                                 className="text-white text-xl font-bold hover:cursor-pointer"
@@ -85,16 +88,17 @@ const Navbar = () => {
                             </button>
 
                         </div>
-                        </>
-                    ) :
-                        (<>
+                    )
+                     :
+                       ( <>
                             <Link className="text-white text-xl font-bold" to="/login">Login</Link>
                             <Link className="text-white text-xl font-bold" to="/signUp">SignUp</Link>
-                        </>
+                        </>)
 
-                        )
+                        
                     }
                 </div>
+  x
             </div>
         </div>
     );
