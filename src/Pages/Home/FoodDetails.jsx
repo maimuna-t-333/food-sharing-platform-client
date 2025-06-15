@@ -1,45 +1,61 @@
 import { use, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const FoodDetails = () => {
+
+    const queryClient = useQueryClient();
     const food = useLoaderData();
     const [showModal, setShowModal] = useState(false);
     const [notes, setNotes] = useState('');
     const { user } = use(AuthContext);
-    const requestDate = new Date().toISOString().slice(0, 16); // ISO format, trim seconds
+    const requestDate = new Date().toISOString().slice(0, 16);
 
-    const handleRequest = async () => {
-        const requestData = {
-            foodId: food._id,
-            foodName: food.name,
-            foodImage: food.image,
-            donorEmail: food.donorEmail,
-            donorName: food.donorName,
-            userEmail: user.email,
-            requestDate,
-            pickupLocation: food.pickupLocation,
-            expireDate: food.expireDate,
-            notes,
-            status: 'requested'
-        };
+    const mutation = useMutation({
+        mutationFn: async () => {
+            const requestData = {
+                foodId: food._id,
+                foodName: food.name,
+                foodImage: food.image,
+                donorEmail: food.donorEmail,
+                donorName: food.donorName,
+                userEmail: user.email,
+                requestDate,
+                pickupLocation: food.pickupLocation,
+                expireDate: food.expireDate,
+                notes,
+                status: 'requested'
+            };
 
+            await fetch('http://localhost:3000/requests', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            });
 
+            await fetch(`http://localhost:3000/foods/${food._id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: 'requested' })
+            });
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(['foods']);
+            queryClient.invalidateQueries(['myRequests']);
+            setShowModal(false);
+        },
+        onError: (error) => {
+            console.error('Mutation failed:', error);
+        }
+    });
 
-        // Save request
-        await fetch('http://localhost:3000/requests', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(requestData)
-        });
-
-        // Update food status
-        await fetch(`http://localhost:3000/foods/${food._id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: 'requested' })
-        });
-        setShowModal(false);
+    const handleRequest = () => {
+        mutation.mutate();
     };
 
     return (
@@ -65,9 +81,6 @@ const FoodDetails = () => {
                 </div>
             </div>
 
-            {/* Modal */}
-
-
             {showModal && (
                 <div className="fixed inset-0 bg-[#88b4cd] bg-opacity-30 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded-lg max-w-xl w-full shadow-xl relative">
@@ -83,7 +96,6 @@ const FoodDetails = () => {
                             />
                             <label>Food Image</label>
                             <input type="text" value={food.image} disabled className="input input-bordered w-full" />
-
                             <label>Food ID</label>
                             <input type="text" value={food._id} disabled className="input input-bordered w-full" />
                             <label>Food Donator Name </label>

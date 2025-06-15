@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
 import { Link } from 'react-router';
 
+const fetchFoods = async (sortOrder,searchTerm) => {
+    const res = await fetch(`http://localhost:3000/foods?sort=${sortOrder}&search=${searchTerm}`);
+    return res.json();
+};
+
 const AvailableFood = () => {
-    const [foods, setFoods] = useState([]);
-    const [loading, setLoading] = useState(true);
+
     const [sortOrder, setSortOrder] = useState('asc');
+    const [searchTerm, setSearchTerm] = useState('');
     const [toggle, setToggle] = useState(true);
 
-    useEffect(() => {
-        setLoading(true);
-        fetch(`http://localhost:3000/foods?sort=${sortOrder}`)
-            .then(res => res.json())
-            .then(data => {
-                setFoods(data);
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error(err);
-                setLoading(false);
-            });
-    }, [sortOrder]);
 
+
+    const { data: foods = [], loading } = useQuery({
+        queryKey: ['foods', sortOrder, searchTerm],
+        queryFn: () => fetchFoods(sortOrder,searchTerm),
+    });
 
     if (loading) {
         return <span className="loading loading-ring loading-xl"></span>
@@ -29,6 +27,15 @@ const AvailableFood = () => {
     return (
         <div className="max-w-7xl mx-auto px-4 py-10">
             <h2 className="text-3xl font-bold text-center mb-6 text-[#dd882e]">Available Foods</h2>
+            <div className="mb-4 flex justify-between items-center">
+                <input
+                    type="text"
+                    placeholder="Search by food name..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="border px-3 py-2 rounded w-full max-w-xs mr-4"
+                />
+            </div>
             <div className="mb-6 text-right flex justify-between ">
                 <div>
                     <button onClick={() => setToggle(!toggle)} className='btn text-white bg-[#6285c6]'>Change Layout</button>
