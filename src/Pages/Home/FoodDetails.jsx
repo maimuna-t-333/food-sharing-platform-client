@@ -39,14 +39,14 @@ const FoodDetails = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: 'requested' })
         });
-
-        // alert('Food requested successfully!');
         setShowModal(false);
     };
 
     return (
         <div className='bg-gray-300 min-h-screen py-10'>
             <div className="max-w-4xl mx-auto bg-white p-6 rounded-2xl">
+
+
                 <img src={food.image} alt={food.name} className="w-full h-64 object-cover rounded-lg mb-4" />
                 <div className='text-center space-y-2'>
                     <h2 className="text-3xl font-bold">{food.name}</h2>
@@ -66,29 +66,39 @@ const FoodDetails = () => {
             </div>
 
             {/* Modal */}
-         
-            
+
+
             {showModal && (
                 <div className="fixed inset-0 bg-[#88b4cd] bg-opacity-30 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded-lg max-w-xl w-full shadow-xl relative">
                         <h2 className="text-xl font-semibold mb-4 text-center">Confirm Request</h2>
-                     
+
                         <div className="space-y-3">
-                            {/* <input type="text" value={food.name} disabled className="input input-bordered w-full" /> */}
+                            <label>Food Name</label>
                             <input
                                 type="text"
                                 value={food.name || ''}
                                 disabled
                                 className="input input-bordered w-full"
                             />
+                            <label>Food Image</label>
+                            <input type="text" value={food.image} disabled className="input input-bordered w-full" />
 
+                            <label>Food ID</label>
                             <input type="text" value={food._id} disabled className="input input-bordered w-full" />
+                            <label>Food Donator Name </label>
                             <input type="text" value={food.donorName} disabled className="input input-bordered w-full" />
-                            {/* <input type="text" value={food.donorEmail} disabled className="input input-bordered w-full" /> */}
+                            <label>Food Donator email</label>
+                            <input type="text" value={food.donorEmail} disabled className="input input-bordered w-full" />
+                            <label>User email</label>
                             <input type="text" value={user?.email} disabled className="input input-bordered w-full" />
+                            <label>Request Date</label>
                             <input type="datetime-local" value={requestDate} disabled className="input input-bordered w-full" />
+                            <label>Pickup Location</label>
                             <input type="text" value={food.pickupLocation} disabled className="input input-bordered w-full" />
+                            <label>Expire Date</label>
                             <input type="text" value={food.expireDate} disabled className="input input-bordered w-full" />
+                            <label>Additional Notes</label>
                             <textarea
                                 placeholder="Additional Notes"
                                 value={notes}

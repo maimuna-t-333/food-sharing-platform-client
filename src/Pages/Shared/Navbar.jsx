@@ -72,7 +72,7 @@ const Navbar = () => {
 
                             <div className="tooltip tooltip-bottom" data-tip={user.displayName || 'User'}>
                                 <img
-                                    src={user.photoURL || 'https://i.ibb.co/2n4d3kR/default-avatar.png'}
+                                    src={user.photoURL || 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?uid=R183836372&ga=GA1.1.1518060000.1737402150&semt=ais_hybrid&w=740'}
                                     alt="User Avatar"
                                     className="w-10 h-10 rounded-full border-2 border-white"
                                 />

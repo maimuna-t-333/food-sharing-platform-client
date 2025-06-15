@@ -21,7 +21,9 @@ const AvailableFood = () => {
     }, [sortOrder]); 
 
 
-    if (loading) return <p className="text-center">Loading...</p>;
+    if (loading){
+         return <span className="loading loading-ring loading-xl"></span>
+    };
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10">
