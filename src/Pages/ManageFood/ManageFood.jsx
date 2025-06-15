@@ -1,17 +1,17 @@
 import { use, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
-import { useNavigate } from 'react-router';
 
 
 const ManageFood = () => {
   const { user } = use(AuthContext);
   const [foods, setFoods] = useState([]);
-  const navigate = useNavigate();
+  const [selectedFood, setSelectedFood] = useState(null); 
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/my-foods?email=${user.email}`)
+      fetch(`http://localhost:3000/myFood?email=${user.email}`)
         .then(res => res.json())
         .then(data => setFoods(data));
     }
@@ -42,8 +42,41 @@ const ManageFood = () => {
     });
   };
 
-  const handleUpdate = (id) => {
-    navigate(`/availableFood/${id}`);
+  const openUpdateModal = (food) => {
+    setSelectedFood(food);
+    setShowModal(true);
+  };
+
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const updatedFood = {
+      name: form.name.value,
+      quantity: form.quantity.value,
+      pickupLocation: form.pickupLocation.value,
+      expireDate: form.expireDate.value,
+      notes: form.notes.value,
+    };
+
+    fetch(`http://localhost:3000/foods/${selectedFood._id}`, {
+      method: 'PATCH',
+      headers:{
+         'Content-Type': 'application/json'
+         },
+      body: JSON.stringify(updatedFood),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount > 0) {
+          Swal.fire('Updated!', 'Your food item has been updated.', 'success');
+
+          const updatedFoods = foods.map(food =>
+            food._id === selectedFood._id ? { ...food, ...updatedFood } : food
+          );
+          setFoods(updatedFoods);
+          setShowModal(false);
+        }
+      });
   };
 
   return (
@@ -71,14 +104,14 @@ const ManageFood = () => {
                 <td>{food.expireDate}</td>
                 <td className="space-x-2">
                   <button
-                    onClick={() => handleUpdate(food._id)}
-                    className="btn btn-sm bg-blue-500 text-white hover:bg-blue-700"
+                    onClick={() => openUpdateModal(food)}
+                    className="btn btn-sm bg-[#d47555] text-white hover:bg-[#d47555]"
                   >
                     Update
                   </button>
                   <button
                     onClick={() => handleDelete(food._id)}
-                    className="btn btn-sm bg-red-500 text-white hover:bg-red-700"
+                    className="btn btn-sm bg-[#7760d5] text-white hover:bg-[#7760d5]"
                   >
                     Delete
                   </button>
@@ -91,8 +124,56 @@ const ManageFood = () => {
           <p className="text-center mt-8 text-gray-600">No foods added yet.</p>
         )}
       </div>
+
+      {showModal && selectedFood && (
+        <div className="fixed inset-0 bg-[#99dbf3] bg-opacity-40 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg max-w-md w-full shadow-xl">
+            <h2 className="text-xl font-semibold mb-4 text-center">Update Food</h2>
+            <form onSubmit={handleUpdateSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                defaultValue={selectedFood.name}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="text"
+                name="quantity"
+                defaultValue={selectedFood.quantity}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="text"
+                name="pickupLocation"
+                defaultValue={selectedFood.pickupLocation}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="date"
+                name="expireDate"
+                defaultValue={selectedFood.expireDate}
+                className="input input-bordered w-full"
+                required
+              />
+              <textarea
+                name="notes"
+                defaultValue={selectedFood.notes}
+                className="textarea textarea-bordered w-full"
+              ></textarea>
+              <div className="flex justify-end gap-3 mt-4">
+                <button type="submit" className="btn btn-success">Update</button>
+                <button onClick={() => setShowModal(false)} type="button" className="btn btn-outline">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default ManageFood;
+
