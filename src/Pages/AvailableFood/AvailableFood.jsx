@@ -5,9 +5,10 @@ const AvailableFood = () => {
     const [foods, setFoods] = useState([]);
     const [loading, setLoading] = useState(true);
     const [sortOrder, setSortOrder] = useState('asc');
+    const [toggle, setToggle] = useState(true);
 
     useEffect(() => {
-        setLoading(true); 
+        setLoading(true);
         fetch(`http://localhost:3000/foods?sort=${sortOrder}`)
             .then(res => res.json())
             .then(data => {
@@ -18,36 +19,36 @@ const AvailableFood = () => {
                 console.error(err);
                 setLoading(false);
             });
-    }, [sortOrder]); 
+    }, [sortOrder]);
 
 
-    if (loading){
-         return <span className="loading loading-ring loading-xl"></span>
+    if (loading) {
+        return <span className="loading loading-ring loading-xl"></span>
     };
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10">
-            <h2 className="text-3xl font-bold text-center mb-6 text-[#2c3e50]">Available Foods</h2>
-
-
-            <div className="mb-6 text-right">
-                <label className="font-medium mr-2">Sort by Expire Date:</label>
-                <select
-                    value={sortOrder}
-                    onChange={(e) => {
-                        console.log("New sortOrder:", e.target.value);
-                        setSortOrder(e.target.value);
-                    }}
-                    className="border px-3 py-1 rounded"
-                >
-
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
+            <h2 className="text-3xl font-bold text-center mb-6 text-[#dd882e]">Available Foods</h2>
+            <div className="mb-6 text-right flex justify-between ">
+                <div>
+                    <button onClick={() => setToggle(!toggle)} className='btn text-white bg-[#6285c6]'>Change Layout</button>
+                </div>
+                <div>
+                    <label className="font-medium mr-2">Sort by Expire Date:</label>
+                    <select
+                        value={sortOrder}
+                        onChange={(e) => {
+                            console.log("New sortOrder:", e.target.value);
+                            setSortOrder(e.target.value);
+                        }}
+                        className="border px-3 py-1 rounded">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
             </div>
 
-  
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className={`grid gap-6 ${toggle ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
                 {foods.map((food) => (
                     <div
                         key={food._id}
