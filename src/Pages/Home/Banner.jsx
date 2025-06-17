@@ -32,7 +32,7 @@ const DancingText = ({ text }) => {
 const Banner = () => {
   return (
     <div>
-      <div className="carousel w-11/12 ml-20 h-[600px] my-10 rounded-full">
+      <div className="carousel w-11/12 ml-2 lg:ml-20 h-[600px] my-10 rounded-full">
         {/* Slide 1 */}
         <div id="slide1" className="carousel-item relative w-full">
           <img src={banner1} className="w-full" />
