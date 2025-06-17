@@ -1,22 +1,27 @@
 import React, { use } from 'react';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 import { useNavigate } from 'react-router';
+import { getIdToken } from 'firebase/auth';
+
+
 
 const SocialLogin = () => {
+    const { signInWithGoogle } = use(AuthContext)
+    const navigate = useNavigate()
 
-    const {signInWithGoogle}=use(AuthContext)
-    const navigate=useNavigate()
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithGoogle();
+      const user = result.user;
+      const idToken = await getIdToken(user);
+      console.log('Firebase ID token:', idToken);
+      localStorage.setItem('accessToken', idToken);
 
-    const handleGoogleLogin=()=>{
-        signInWithGoogle()
-        .then(result=>{
-            console.log(result.user)
-            navigate('/')
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+      navigate('/');
+    } catch (error) {
+      console.error('Login error:', error);
     }
+  };
     return (
         <div>
             <div className="divider">OR</div>
@@ -30,3 +35,5 @@ const SocialLogin = () => {
 };
 
 export default SocialLogin;
+
+

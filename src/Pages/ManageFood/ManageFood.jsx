@@ -1,24 +1,40 @@
-import { use, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 
-
 const ManageFood = () => {
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
-  const [selectedFood, setSelectedFood] = useState(null); 
+  const [selectedFood, setSelectedFood] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+
   useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:3000/myFood?email=${user.email}`)
-        .then(res => res.json())
-        .then(data => setFoods(data));
-    }
+    const fetchFoods = async () => {
+      if (user?.email) {
+        console.log(user?.email)
+        try {
+          const token = await user.getIdToken();
+          const res = await fetch(`http://localhost:3000/myFood?email=${user.email}`,{
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+        }
+        );
+          const data = await res.json();
+          setFoods(data);
+        } catch (error) {
+          console.error('Error fetching foods:', error);
+        }
+      }
+    };
+
+    fetchFoods();
   }, [user]);
 
-  const handleDelete = (id) => {
-    Swal.fire({
+
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
       title: 'Are you sure?',
       text: 'This will delete your food item permanently!',
       icon: 'warning',
@@ -26,20 +42,26 @@ const ManageFood = () => {
       confirmButtonColor: '#e3342f',
       cancelButtonColor: '#6c757d',
       confirmButtonText: 'Yes, delete it!',
-    }).then(result => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:3000/foods/${id}`, {
-          method: 'DELETE',
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.deletedCount > 0) {
-              Swal.fire('Deleted!', 'Your food item has been deleted.', 'success');
-              setFoods(foods.filter(food => food._id !== id));
-            }
-          });
-      }
     });
+
+    if (result.isConfirmed) {
+      try {
+        const token = await user.getIdToken();
+        const res = await fetch(`http://localhost:3000/foods/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await res.json();
+        if (data.deletedCount > 0) {
+          Swal.fire('Deleted!', 'Your food item has been deleted.', 'success');
+          setFoods(foods.filter(food => food._id !== id));
+        }
+      } catch (error) {
+        console.error('Error deleting food:', error);
+      }
+    }
   };
 
   const openUpdateModal = (food) => {
@@ -47,7 +69,7 @@ const ManageFood = () => {
     setShowModal(true);
   };
 
-  const handleUpdateSubmit = (e) => {
+  const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const updatedFood = {
@@ -58,25 +80,29 @@ const ManageFood = () => {
       notes: form.notes.value,
     };
 
-    fetch(`http://localhost:3000/foods/${selectedFood._id}`, {
-      method: 'PATCH',
-      headers:{
-         'Content-Type': 'application/json'
-         },
-      body: JSON.stringify(updatedFood),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.modifiedCount > 0) {
-          Swal.fire('Updated!', 'Your food item has been updated.', 'success');
-
-          const updatedFoods = foods.map(food =>
-            food._id === selectedFood._id ? { ...food, ...updatedFood } : food
-          );
-          setFoods(updatedFoods);
-          setShowModal(false);
-        }
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(`http://localhost:3000/foods/${selectedFood._id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedFood),
       });
+
+      const data = await res.json();
+      if (data.modifiedCount > 0) {
+        Swal.fire('Updated!', 'Your food item has been updated.', 'success');
+        const updatedFoods = foods.map(food =>
+          food._id === selectedFood._id ? { ...food, ...updatedFood } : food
+        );
+        setFoods(updatedFoods);
+        setShowModal(false);
+      }
+    } catch (error) {
+      console.error('Error updating food:', error);
+    }
   };
 
   return (

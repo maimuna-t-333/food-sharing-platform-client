@@ -2,8 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 
-const fetchFoods = async (sortOrder,searchTerm) => {
-    const res = await fetch(`http://localhost:3000/foods?sort=${sortOrder}&search=${searchTerm}`);
+
+const fetchFoods = async (sortOrder, searchTerm) => {
+    
+    const res = await fetch(`http://localhost:3000/foods?sort=${sortOrder}&search=${searchTerm}`
+
+    );
     return res.json();
 };
 
@@ -17,7 +21,7 @@ const AvailableFood = () => {
 
     const { data: foods = [], loading } = useQuery({
         queryKey: ['foods', sortOrder, searchTerm],
-        queryFn: () => fetchFoods(sortOrder,searchTerm),
+        queryFn: () => fetchFoods(sortOrder, searchTerm),
     });
 
     if (loading) {

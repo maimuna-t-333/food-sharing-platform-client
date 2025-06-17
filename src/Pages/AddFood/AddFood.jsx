@@ -1,9 +1,9 @@
-import { use } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 
 const AddFood = () => {
-    const { user } = use(AuthContext);
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleAddFood = async (e) => {
@@ -30,19 +30,25 @@ const AddFood = () => {
             status: 'available',
         };
 
-        const res = await fetch('http://localhost:3000/foods', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(foodData),
-        });
+        try {
+            const token = await user.getIdToken();
+            const res = await fetch('http://localhost:3000/foods', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(foodData),
+            });
 
-        if (res.ok) {
-            form.reset();
-            navigate('/availableFood');
-        } else {
-            alert('Something went wrong. Please try again.');
+            if (res.ok) {
+                form.reset();
+                navigate('/availableFood');
+            } else {
+                alert('Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error adding food:', error);
         }
     };
 
@@ -58,13 +64,13 @@ const AddFood = () => {
                 <textarea name="notes" placeholder="Additional Notes" className="textarea textarea-bordered w-full"></textarea>
 
                 <label className="label text-xs">Donor Name</label>
-                <input type="text" value={user?.displayName || 'User'} readOnly className="input input-bordered w-full bg-gray-100 text-gray-500"/>
+                <input type="text" value={user?.displayName || 'User'} readOnly className="input input-bordered w-full bg-gray-100 text-gray-500" />
 
                 <label className="label text-xs">Donor Email</label>
-                <input type="email" value={user?.email || ''} readOnly className="input input-bordered w-full bg-gray-100 text-gray-500"/>
+                <input type="email" value={user?.email || ''} readOnly className="input input-bordered w-full bg-gray-100 text-gray-500" />
 
                 <label className="label text-xs">Donor Image URL</label>
-                <input type="text" value={user?.photoURL || 'photo url'} readOnly className="input input-bordered w-full bg-gray-100 text-gray-500"/>
+                <input type="text" value={user?.photoURL || 'photo url'} readOnly className="input input-bordered w-full bg-gray-100 text-gray-500" />
 
                 <label className="label text-xs">Food Status</label>
                 <input
@@ -73,7 +79,7 @@ const AddFood = () => {
                     readOnly
                     className="input input-bordered w-full bg-gray-100 text-gray-500"
                     title="Food status is set automatically"
-                    />
+                />
 
                 <button type="submit" className="btn bg-[#e76c6a] w-full">Add Food</button>
             </form>
@@ -82,3 +88,4 @@ const AddFood = () => {
 };
 
 export default AddFood;
+

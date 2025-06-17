@@ -1,15 +1,32 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 
+
 const RequestFood = () => {
   const { user } = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
+  
 
   useEffect(() => {
     if (!user) return;
-    fetch(`http://localhost:3000/myRequests?email=${user.email}`)
-      .then(res => res.json())
-      .then(data => setRequests(data));
+
+    const fetchRequests = async () => {
+      try {
+        const token = await user.getIdToken();
+        const res = await fetch(`http://localhost:3000/myRequests?email=${user.email}`
+            , {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await res.json();
+        setRequests(data);
+      } catch (error) {
+        console.error('Error fetching requests:', error);
+      }
+    };
+
+    fetchRequests();
   }, [user]);
 
   if (!user) {
@@ -35,11 +52,9 @@ const RequestFood = () => {
               <tr>
                 <th>#</th>
                 <th>Food</th>
-
                 <th>Pickup Location</th>
                 <th>Expire Date</th>
                 <th>Request Date</th>
- 
               </tr>
             </thead>
             <tbody>
@@ -56,11 +71,9 @@ const RequestFood = () => {
                       <span>{item.foodName}</span>
                     </div>
                   </td>
-
                   <td>{item.pickupLocation}</td>
                   <td>{item.expireDate}</td>
                   <td>{new Date(item.requestDate).toLocaleString()}</td>
-
                 </tr>
               ))}
             </tbody>
@@ -72,5 +85,6 @@ const RequestFood = () => {
 };
 
 export default RequestFood;
+
 
 

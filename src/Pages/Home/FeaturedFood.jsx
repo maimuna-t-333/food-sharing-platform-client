@@ -1,11 +1,14 @@
 import React, { use } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
+import { motion } from 'framer-motion';
 
 const FeaturedFood = ({ foodPromise }) => {
     const foods = use(foodPromise);
     const { user } = use(AuthContext);
     const navigate = useNavigate();
+
+
 
     const handleViewDetails = (_id) => {
         if (!user) {
@@ -18,9 +21,15 @@ const FeaturedFood = ({ foodPromise }) => {
     return (
         <div className="bg-gray-300">
             <section className="max-w-7xl mx-auto my-10 px-4">
-                <h2 className="text-4xl font-bold text-center text-[#8b50a4] mb-10 transition duration-300 hover:scale-105">
+                <motion.h2
+                    className="text-4xl font-bold text-center text-[#8b50a4] mb-10 transition duration-300 hover:scale-105"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.1 }}
+                >
                     Featured Foods
-                </h2>
+                </motion.h2>
+               
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {foods.slice(0, 6).map((food) => (
@@ -30,7 +39,7 @@ const FeaturedFood = ({ foodPromise }) => {
                             <img
                                 src={food.image}
                                 alt={food.name}
-                                className="w-full h-48 object-cover transition duration-300 hover:brightness-90"/>
+                                className="w-full h-48 object-cover transition duration-300 hover:brightness-90" />
                             <div className="p-4 space-y-2">
                                 <h3 className="text-xl font-semibold text-gray-800">{food.name}</h3>
                                 <p><strong>Quantity:</strong> {food.quantity}</p>

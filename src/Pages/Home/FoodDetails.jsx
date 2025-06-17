@@ -14,6 +14,7 @@ const FoodDetails = () => {
 
     const mutation = useMutation({
         mutationFn: async () => {
+           
             const requestData = {
                 foodId: food._id,
                 foodName: food.name,
@@ -31,7 +32,8 @@ const FoodDetails = () => {
             await fetch('http://localhost:3000/requests', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    
                 },
                 body: JSON.stringify(requestData)
             });
@@ -39,7 +41,7 @@ const FoodDetails = () => {
             await fetch(`http://localhost:3000/foods/${food._id}`, {
                 method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ status: 'requested' })
             });
