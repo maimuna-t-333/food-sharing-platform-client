@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 const fetchFoods = async (sortOrder, searchTerm) => {
     
-    const res = await fetch(`http://localhost:3000/foods?sort=${sortOrder}&search=${searchTerm}`
+    const res = await fetch(`https://food-sharing-platform-server.vercel.app/foods?sort=${sortOrder}&search=${searchTerm}`
 
     );
     return res.json();
@@ -30,7 +30,7 @@ const AvailableFood = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10">
-            <h2 className="text-3xl font-bold text-center mb-6 text-[#dd882e]">Available Foods</h2>
+            <h2 className="text-3xl font-bold text-center mb-6 text-black">Available Foods</h2>
             <div className="mb-4 flex justify-between items-center">
                 <input
                     type="text"
@@ -42,7 +42,7 @@ const AvailableFood = () => {
             </div>
             <div className="mb-6 text-right flex justify-between ">
                 <div>
-                    <button onClick={() => setToggle(!toggle)} className='btn text-white bg-[#6285c6]'>Change Layout</button>
+                    <button onClick={() => setToggle(!toggle)} className='btn text-white bg-[#1d4757]'>Change Layout</button>
                 </div>
                 <div>
                     <label className="font-medium mr-2">Sort by Expire Date:</label>
@@ -52,7 +52,7 @@ const AvailableFood = () => {
                             console.log("New sortOrder:", e.target.value);
                             setSortOrder(e.target.value);
                         }}
-                        className="border px-3 py-1 rounded">
+                        className="">
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>
@@ -75,7 +75,7 @@ const AvailableFood = () => {
 
                             <div className="mt-3">
                                 <Link to={`/foods/${food._id}`}>
-                                    <button className="bg-[#d0807f] hover:bg-[#d0807f] cursor-pointer text-white py-1 px-4 rounded">
+                                    <button className="bg-[#1d4757] hover:bg-[#1d4757] cursor-pointer text-white py-1 px-4 rounded">
                                         View Details
                                     </button>
                                 </Link>

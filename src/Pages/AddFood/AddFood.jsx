@@ -32,7 +32,7 @@ const AddFood = () => {
 
         try {
             const token = await user.getIdToken();
-            const res = await fetch('http://localhost:3000/foods', {
+            const res = await fetch('https://food-sharing-platform-server.vercel.app/foods', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

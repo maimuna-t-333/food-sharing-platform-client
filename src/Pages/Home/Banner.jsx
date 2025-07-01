@@ -36,8 +36,8 @@ const Banner = () => {
         {/* Slide 1 */}
         <div id="slide1" className="carousel-item relative w-full">
           <img src={banner1} className="w-full" />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-            <DancingText text="Share the Flavor. Savor the Moment." />
+          <div className="absolute inset-0  flex items-center justify-center bg-black/40">
+            <DancingText className='' text="Share the Flavor. Savor the Moment." />
           </div>
           <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
             <a href="#slide3" className="btn btn-circle">❮</a>

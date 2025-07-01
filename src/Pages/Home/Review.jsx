@@ -30,10 +30,10 @@ const reviews = [
 
 const Review = () => {
   return (
-    <div className="bg-orange-50 py-16 px-6">
+    <div className=" py-16 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <motion.h2
-          className="text-4xl font-extrabold text-[#7BB661] mb-14"
+          className="text-4xl font-extrabold text-black mb-14"
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}

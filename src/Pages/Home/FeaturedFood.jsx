@@ -19,10 +19,10 @@ const FeaturedFood = ({ foodPromise }) => {
     };
 
     return (
-        <div className="bg-gray-300">
+        <div className="">
             <section className="max-w-7xl mx-auto my-10 px-4">
                 <motion.h2
-                    className="text-4xl font-bold text-center text-[#8b50a4] mb-10 transition duration-300 hover:scale-105"
+                    className="text-4xl font-bold text-center text-black mb-10 transition duration-300 hover:scale-105"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.1 }}
@@ -51,7 +51,7 @@ const FeaturedFood = ({ foodPromise }) => {
                                 )}
                                 <button
                                     onClick={() => handleViewDetails(food._id)}
-                                    className="btn bg-[#E67E22] rounded-2xl text-white hover:bg-[#cf6a1c] transition">
+                                    className="btn bg-[#1d4757] rounded-2xl text-white hover:bg-[#1d4757] transition">
                                     View Details
                                 </button>
                             </div>
@@ -62,7 +62,7 @@ const FeaturedFood = ({ foodPromise }) => {
                 <div className="text-center mt-10">
                     <button
                         onClick={() => navigate('/availableFood')}
-                        className="btn px-6 py-3 text-white border-none bg-[#386591] rounded-lg hover:bg-[#2f547a] transition duration-300 transform hover:scale-105">
+                        className="btn px-6 py-3 text-white border-none bg-[#1d4757] rounded-lg hover:bg-[#1d4757] transition duration-300 transform hover:scale-105">
                         Show All Foods
                     </button>
                 </div>

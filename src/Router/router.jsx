@@ -12,6 +12,7 @@ import AddFood from "../Pages/AddFood/AddFood";
 import AvailableFood from "../Pages/AvailableFood/AvailableFood";
 import RequestFood from "../Pages/RequestFood/RequestFood";
 import ManageFood from "../Pages/ManageFood/ManageFood";
+import AboutUs from "../Pages/AboutUs/AboutUs";
 
 
 const router = createBrowserRouter([
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
         {
           path:'/foods/:id',
           Component:FoodDetails,
-          loader:({params})=>fetch(`http://localhost:3000/foods/${params.id}`)
+          loader:({params})=>fetch(`https://food-sharing-platform-server.vercel.app/foods/${params.id}`)
         },
         {
           path:'/addFood',
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
           Component:AvailableFood,
 
         },
+        
         {
           path:'/myFood',
           element: <PrivateRoute><RequestFood></RequestFood></PrivateRoute>
@@ -52,7 +54,12 @@ const router = createBrowserRouter([
         {
           path:'manageFood',
           element:<PrivateRoute><ManageFood></ManageFood></PrivateRoute>
+        },
+        {
+          path:'about',
+          Component:AboutUs
         }
+
 
     ]
   },

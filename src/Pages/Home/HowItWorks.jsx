@@ -26,10 +26,10 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <div className="px-4 py-16 bg-orange-50">
+    <div className="px-4 py-16 ">
       <section className="max-w-7xl mx-auto text-center">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold mb-14 text-[#337aa9]"
+          className="text-3xl md:text-4xl font-bold mb-14 text-black"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

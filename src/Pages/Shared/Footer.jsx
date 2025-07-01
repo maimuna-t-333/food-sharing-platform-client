@@ -7,7 +7,7 @@ import { SlSocialYoutube } from "react-icons/sl";
 const Footer = () => {
     return (
         <div>
-            <footer className="footer footer-horizontal footer-center  text-[#3A0519] p-10 bg-[#F39C72]">
+            <footer className="footer footer-horizontal footer-center  text-black p-10 bg-[#5e7784]">
                 <aside>
                     <img className='w-26 h-26 rounded-b-full' src={logo} alt="" />
                     <nav>

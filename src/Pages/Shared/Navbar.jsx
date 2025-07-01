@@ -22,11 +22,11 @@ const Navbar = () => {
     };
 
     return (
-        <div className="">
-            <div className="navbar bg-[#c0abda] shadow-sm p-6">
+        <div className="sticky top-0 z-50">
+            <div className="navbar bg-[#5e7784] shadow-sm p-6">
 
                 <div className="navbar-start">
-                    <div className="dropdown text-white">
+                    <div className="dropdown text-black">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
@@ -34,10 +34,11 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-300 rounded-box z-10 mt-3 w-52 p-2 shadow text-[#555555]"
+                            className="menu menu-sm dropdown-content bg-base-300 rounded-box z-10 mt-3 w-52 p-2 shadow text-black"
                         >
                             <Link to="/">Home</Link>
                             <Link to="/availableFood">Available Foods</Link>
+                            <Link to="/about">About Us</Link>
                             {user && (
                                 <>
                                     <Link to="/addFood">Add Food</Link>
@@ -47,14 +48,15 @@ const Navbar = () => {
                             )}
                         </ul>
                     </div>
-                    <h2 className="text-white text-xl font-bold ml-2">Share A Bite</h2>
+                    <h2 className="text-black text-xl font-bold ml-2">Share A Bite</h2>
                     <img className="w-12 h-12 ml-2 rounded-b-full" src={logo} alt="Food Logo" />
                 </div>
 
 
-                <div className="navbar-center space-x-4 text-white hidden md:flex">
+                <div className="navbar-center space-x-4 text-black hidden md:flex">
                     <Link to="/">Home</Link>
                     <Link to="/availableFood">Available Foods</Link>
+                    <Link to="/about">About Us</Link>
                     {user && (
                         <>
                             <Link to="/addFood">Add Food</Link>
@@ -88,8 +90,8 @@ const Navbar = () => {
                     )
                         :
                         (<>
-                            <Link className="text-white text-xl font-bold" to="/login">Login</Link>
-                            <Link className="text-white text-xl font-bold" to="/signUp">SignUp</Link>
+                            <Link className="text-black text-xl font-bold" to="/login">Login</Link>
+                            <Link className="text-black text-xl font-bold" to="/signUp">SignUp</Link>
                         </>)
                     }
                 </div>
