@@ -68,10 +68,10 @@ const AvailableFood = () => {
                         <img src={food.image} alt={food.name} className="w-full h-48 object-cover" />
                         <div className="p-4 space-y-1">
                             <h3 className="text-xl font-semibold">{food.name}</h3>
-                            <p><strong>Quantity:</strong> {food.quantity}</p>
+                            
                             <p><strong>Expires:</strong> {food.expireDate}</p>
                             <p><strong>Pickup:</strong> {food.pickupLocation}</p>
-                            <p><strong>Donor:</strong> {food.donorName}</p>
+                           
 
                             <div className="mt-3">
                                 <Link to={`/foods/${food._id}`}>

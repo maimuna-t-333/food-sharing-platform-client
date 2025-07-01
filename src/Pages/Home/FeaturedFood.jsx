@@ -31,7 +31,7 @@ const FeaturedFood = ({ foodPromise }) => {
                 </motion.h2>
                
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     {foods.slice(0, 6).map((food) => (
                         <div
                             key={food._id}
@@ -42,17 +42,17 @@ const FeaturedFood = ({ foodPromise }) => {
                                 className="w-full h-48 object-cover transition duration-300 hover:brightness-90" />
                             <div className="p-4 space-y-2">
                                 <h3 className="text-xl font-semibold text-gray-800">{food.name}</h3>
-                                <p><strong>Quantity:</strong> {food.quantity}</p>
+                                
                                 <p><strong>Pickup:</strong> {food.pickupLocation}</p>
-                                <p><strong>Expires:</strong> {food.expireDate}</p>
-                                <p><strong>Donor:</strong> {food.donorName}</p>
+                                
+                                
                                 {food.notes && (
                                     <p className="text-sm italic text-gray-600">"{food.notes}"</p>
                                 )}
                                 <button
                                     onClick={() => handleViewDetails(food._id)}
                                     className="btn bg-[#1d4757] rounded-2xl text-white hover:bg-[#1d4757] transition">
-                                    View Details
+                                    See More
                                 </button>
                             </div>
                         </div>
