@@ -81,7 +81,7 @@ const AddFood = () => {
                     title="Food status is set automatically"
                 />
 
-                <button type="submit" className="btn bg-[#e76c6a] w-full">Add Food</button>
+                <button type="submit" className="btn bg-[#1d4757] text-white w-full">Add Food</button>
             </form>
         </div>
     );

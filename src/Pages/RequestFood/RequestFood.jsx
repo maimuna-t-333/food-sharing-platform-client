@@ -41,14 +41,14 @@ const RequestFood = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h2 className="text-3xl text-center font-bold mb-6 text-[#79b85d]">My Food Requests</h2>
+      <h2 className="text-3xl text-center font-bold mb-6 text-black">My Food Requests</h2>
 
       {requests.length === 0 ? (
-        <p className="text-center text-gray-500">No food requests found.</p>
+        <p className="text-center text-black">No food requests found.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full bg-white rounded-lg shadow-md">
-            <thead className="bg-[#7BB661] text-white">
+            <thead className="bg-[#1d4757] text-white">
               <tr>
                 <th>#</th>
                 <th>Food</th>

@@ -110,7 +110,7 @@ const ManageFood = () => {
       <h2 className="text-3xl font-bold text-center mb-6">Manage My Foods</h2>
       <div className="overflow-x-auto">
         <table className="table w-full bg-white rounded-lg shadow-md">
-          <thead className="bg-[#7BB661] text-white">
+          <thead className="bg-[#1d4757] text-white">
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -131,13 +131,13 @@ const ManageFood = () => {
                 <td className="space-x-2">
                   <button
                     onClick={() => openUpdateModal(food)}
-                    className="btn btn-sm bg-[#d47555] text-white hover:bg-[#d47555]"
+                    className="btn btn-sm bg-[#2d657c] text-white "
                   >
                     Update
                   </button>
                   <button
                     onClick={() => handleDelete(food._id)}
-                    className="btn btn-sm bg-[#7760d5] text-white hover:bg-[#7760d5]"
+                    className="btn btn-sm bg-[#143441] text-white "
                   >
                     Delete
                   </button>
