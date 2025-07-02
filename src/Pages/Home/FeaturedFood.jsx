@@ -20,19 +20,19 @@ const FeaturedFood = ({ foodPromise }) => {
 
     return (
         <div className="">
-            <section className="max-w-7xl mx-auto my-10 px-4">
+            <section className="w-11/12 mx-auto my-10 px-4">
                 <motion.h2
-                    className="text-4xl font-bold text-center text-black mb-10 transition duration-300 hover:scale-105"
+                    className="text-3xl md:text-4xl text-center font-bold mb-14 text-black"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.1 }}
+                    transition={{ duration: 0.5 }}
                 >
                     Featured Foods
                 </motion.h2>
-               
+
 
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                    {foods.slice(0, 6).map((food) => (
+                    {foods.slice(0, 8).map((food) => (
                         <div
                             key={food._id}
                             className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-1 hover:scale-105">
@@ -42,10 +42,10 @@ const FeaturedFood = ({ foodPromise }) => {
                                 className="w-full h-48 object-cover transition duration-300 hover:brightness-90" />
                             <div className="p-4 space-y-2">
                                 <h3 className="text-xl font-semibold text-gray-800">{food.name}</h3>
-                                
+
                                 <p><strong>Pickup:</strong> {food.pickupLocation}</p>
-                                
-                                
+
+
                                 {food.notes && (
                                     <p className="text-sm italic text-gray-600">"{food.notes}"</p>
                                 )}

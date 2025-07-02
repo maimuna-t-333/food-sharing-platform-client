@@ -8,21 +8,21 @@ const reviews = [
   {
     id: 1,
     name: 'Sarah Ahmed',
-    
+
     message: 'I found food for my family when we needed it most. Thank you!',
     rating: 5
   },
   {
     id: 2,
     name: 'Mayaz Uddin',
-   
+
     message: 'Sharing food has never been this easy. Great platform!',
     rating: 4
   },
   {
     id: 3,
     name: 'Jonny Islam',
-  
+
     message: 'This app helped me reduce food waste in my restaurant. Amazing!',
     rating: 5
   }
@@ -31,21 +31,21 @@ const reviews = [
 const Review = () => {
   return (
     <div className=" py-16 px-6">
-      <div className="max-w-6xl mx-auto text-center">
+      <div className="w-11/12 mx-auto text-center">
         <motion.h2
           className="text-4xl font-extrabold text-black mb-14"
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.5 }}
         >
-           What People Are Saying
+          What People Are Saying
         </motion.h2>
 
         <div className="grid gap-8 md:grid-cols-3">
           {reviews.map((review, i) => (
             <motion.div
               key={review.id}
-              className="bg-white rounded-3xl p-6 shadow-lg border-t-8 border-l-8 border-orange-400 hover:shadow-xl transition duration-300"
+              className="bg-white rounded-3xl p-6 shadow-lg border-t-8 border-l-8 border-[#1d4757] hover:shadow-xl transition duration-300"
               initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2 }}
