@@ -4,6 +4,7 @@ import Review from './Review';
 import HowItWorks from './HowItWorks';
 import FeaturedFood from './FeaturedFood';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
+import FoodGallery from './FoodGallary';
 
     const foodPromise = fetch('https://food-sharing-platform-server.vercel.app/foods').then(res => res.json())
 
@@ -14,7 +15,9 @@ const Home = () => {
         <div className='bg-[#dddbdb]'>
             <Banner></Banner>
             <HowItWorks></HowItWorks>
+            
         <FeaturedFood foodPromise={foodPromise}></FeaturedFood>
+        <FoodGallery></FoodGallery>
             <Review></Review>
         </div>
     );
