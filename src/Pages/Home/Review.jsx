@@ -14,7 +14,7 @@ const reviews = [
   },
   {
     id: 2,
-    name: 'Mayaz Uddin',
+    name: 'Nursat Jahan',
 
     message: 'Sharing food has never been this easy. Great platform!',
     rating: 4

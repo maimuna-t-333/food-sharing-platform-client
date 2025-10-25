@@ -13,6 +13,7 @@ import AvailableFood from "../Pages/AvailableFood/AvailableFood";
 import RequestFood from "../Pages/RequestFood/RequestFood";
 import ManageFood from "../Pages/ManageFood/ManageFood";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import Error from "../Pages/Error/Error";
 
 
 const router = createBrowserRouter([
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
         {
           path:'about',
           Component:AboutUs
+        },
+        {
+          path:'*',
+          Component:Error
         }
 
 
