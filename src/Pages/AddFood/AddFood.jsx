@@ -57,8 +57,7 @@ const AddFood = () => {
         }
     };
 
-    return (
-        
+    return (   
          <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md my-4 lg:my-10">
             <h2 className="text-3xl font-bold text-center text-black mb-1">Add Food</h2>
             <p className="text-center text-gray-500 mb-6">Your extra meal could be someone's only meal today.</p>
