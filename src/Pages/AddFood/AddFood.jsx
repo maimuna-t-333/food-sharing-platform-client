@@ -66,7 +66,7 @@ const AddFood = () => {
 
                 {/* Food Information */}
                 <div>
-                    <h3 className="text-sm font-semibold text-black uppercase tracking-wide mb-3 border-b pb-1">Food Information</h3>
+                    <h3 className="text-sm font-semibold text-black  tracking-wide mb-3 border-b pb-1">Food Information</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="label text-xs font-medium">Food Name</label>
@@ -97,7 +97,7 @@ const AddFood = () => {
 
                 {/* Location Information */}
                 <div>
-                    <h3 className="text-sm font-semibold text-black uppercase tracking-wide mb-3 border-b pb-1">Location Information</h3>
+                    <h3 className="text-sm font-semibold text-black tracking-wide mb-3 border-b pb-1">Location Information</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="label text-xs font-medium">Pickup Location</label>
@@ -112,7 +112,7 @@ const AddFood = () => {
 
                 {/* Time Information */}
                 <div>
-                    <h3 className="text-sm font-semibold text-black uppercase tracking-wide mb-3 border-b pb-1">Time Information</h3>
+                    <h3 className="text-sm font-semibold text-black  tracking-wide mb-3 border-b pb-1">Time Information</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="label text-xs font-medium">Expire Date</label>
@@ -132,7 +132,7 @@ const AddFood = () => {
 
                 {/* Description */}
                 <div>
-                    <h3 className="text-sm font-semibold text-black uppercase tracking-wide mb-3 border-b pb-1">Description</h3>
+                    <h3 className="text-sm font-semibold text-black tracking-wide mb-3 border-b pb-1">Description</h3>
                     <textarea
                         name="notes"
                         placeholder="Details of the Food"
@@ -143,7 +143,7 @@ const AddFood = () => {
 
                 {/* Donor Info */}
                 <div>
-                    <h3 className="text-sm font-semibold text-black uppercase tracking-wide mb-3 border-b pb-1">Donor Info</h3>
+                    <h3 className="text-sm font-semibold text-black tracking-wide mb-3 border-b pb-1">Donor Info</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="label text-xs font-medium">Donor Name</label>
@@ -158,7 +158,7 @@ const AddFood = () => {
 
                 {/* Food Status */}
                 <div>
-                    <h3 className="text-sm font-semibold text-black uppercase tracking-wide mb-3 border-b pb-1">Food Status</h3>
+                    <h3 className="text-sm font-semibold text-black tracking-wide mb-3 border-b pb-1">Food Status</h3>
                     <input type="text" value="Available" readOnly className="input input-bordered w-full bg-gray-100 text-gray-500" />
                 </div>
 
