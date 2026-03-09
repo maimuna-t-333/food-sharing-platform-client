@@ -54,7 +54,7 @@ const Navbar = () => {
                     {/* Brand - desktop only */}
                     <div className="items-center gap-2 hidden md:flex">
                         <img className="w-8 h-8 rounded-b-full" src={logo} alt="Food Logo" />
-                        <h2 className="text-black text-xl font-bold">Share A Bite</h2>
+                        <h2 className="text-white text-xl font-bold">Share A Bite</h2>
                     </div>
                 </div>
 
@@ -62,12 +62,12 @@ const Navbar = () => {
                 <div className="navbar-center md:hidden">
                     <div className="flex items-center gap-3">
                         <img className="w-8 h-8 rounded-b-full" src={logo} alt="Food Logo" />
-                        <h2 className="text-black text-lg font-bold">Share A Bite</h2>
+                        <h2 className="text-white text-lg font-bold">Share A Bite</h2>
                     </div>
                 </div>
 
                 {/* Desktop nav links - center */}
-                <div className="navbar-center space-x-4 text-black hidden md:flex">
+                <div className="navbar-center space-x-4 text-white hidden md:flex">
                     <Link to="/">Home</Link>
                     <Link to="/availableFood">Available Foods</Link>
                     <Link to="/about">About Us</Link>
@@ -100,7 +100,7 @@ const Navbar = () => {
                             </button>
                         </div>
                     ) : (
-                        <Link className="text-black text-xl font-bold" to="/login">Login</Link>
+                        <Link className="text-white text-xl font-bold" to="/login">Login</Link>
                     )}
                 </div>
 
