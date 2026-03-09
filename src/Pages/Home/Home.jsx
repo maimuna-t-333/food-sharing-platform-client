@@ -13,7 +13,7 @@ const Home = () => {
     const {user}=use(AuthContext);
     console.log('user access token',user?.accessToken)
     return (
-        <div className='bg-[#dddbdb]'>
+        <div className='bg-gray-50'>
             <Banner></Banner>
             <HowItWorks></HowItWorks>
             
